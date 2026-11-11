@@ -6,13 +6,14 @@ import * as Forgejo from "@t3tools/source-control-forgejo/shared/definition";
 import * as GitCafe from "@t3tools/source-control-gitcafe/shared/definition";
 import * as GitHub from "@t3tools/source-control-github/shared/definition";
 import * as GitLab from "@t3tools/source-control-gitlab/shared/definition";
+import * as SourceCraft from "@t3tools/source-control-sourcecraft/shared/definition";
 
 export { canonicalizePullRequestUrl as canonicalizeGitCafePullRequestUrl } from "@t3tools/source-control-gitcafe/shared/definition";
 
 /**
  * GitHub comes first to preserve the client default for repositories with an unknown host.
- * GitCafe and Cursor Origin claim URLs first because GitHub and Forgejo accept the same routes on
- * any hostname.
+ * GitCafe, Cursor Origin, and SourceCraft claim URLs first because GitHub and Forgejo accept the
+ * same routes on any hostname.
  * Remote recognition needs its own order because host labels can overlap (`gitea.github.example`).
  */
 export const builtInSourceControlDefinitions = makeSourceControlDefinitionRegistry(
@@ -24,12 +25,14 @@ export const builtInSourceControlDefinitions = makeSourceControlDefinitionRegist
     Forgejo.definition,
     Bitbucket.definition,
     AzureDevOps.definition,
+    SourceCraft.definition,
   ],
   {
     claimChangeRequestUrlsFirst: [
       GitCafe.definition.kind,
       CursorOrigin.definition.kind,
       AzureDevOps.definition.kind,
+      SourceCraft.definition.kind,
     ],
     recognizeRemotesIn: [
       GitCafe.definition.kind,
@@ -39,6 +42,7 @@ export const builtInSourceControlDefinitions = makeSourceControlDefinitionRegist
       GitLab.definition.kind,
       AzureDevOps.definition.kind,
       Bitbucket.definition.kind,
+      SourceCraft.definition.kind,
     ],
   },
 );

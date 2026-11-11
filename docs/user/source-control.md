@@ -143,6 +143,24 @@ If cloning or pushing asks for a username, run `origin auth setup-git` to point 
 credentials again. Origin repositories use HTTPS and are published privately. Repositories mirrored
 from GitHub keep their pull requests on GitHub; open those from the GitHub remote.
 
+### SourceCraft
+
+Install [SourceCraft CLI (`src`)](https://sourcecraft.dev/portal/docs/en/sourcecraft/operations/cli-quickstart)
+on your T3 Code server and sign in with `src auth login`. On a machine without a browser, choose
+the personal access token method in `src init`, or set `SOURCECRAFT_TOKEN`.
+
+Run `src auth setup-git` so Git can clone and push over HTTPS with the same sign-in. Otherwise
+add an SSH key to your SourceCraft account.
+
+When cloning or publishing, use `organization/repository`. Your account has an organization
+named after it.
+
+SourceCraft does not report when a pull request was merged or closed, a pull request's commits,
+or names and avatars for people, so T3 Code shows usernames only. Reviewers cannot be requested
+from T3 Code. Requesting changes sets your review decision to `block`.
+Reopening a resolved thread marks it as awaiting resolution, which blocks merging until it is
+resolved again.
+
 ## Start, clone, or publish a project
 
 To start from nothing, choose **New project** in the command palette (`Cmd/Ctrl+K`), or
